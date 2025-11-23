@@ -5,6 +5,18 @@ import './js/save-utils.js';
 
 consoleLog('开始执行background.js Service Worker');
 
+chrome.runtime.onStartup.addListener(async () => {
+	consoleLog('等待初始化...');
+	// 初始化应用
+	new Promise(resolve => {
+		chrome.storage.local.get(null, (items) => {
+			consoleLog('初始化完成');
+			init();
+			resolve();
+		});
+	});
+});
+
 // 监听Service Worker的安装事件
 self.addEventListener('install', (event) => {
 	consoleLog('Service Worker 安装中...');
@@ -85,4 +97,5 @@ function initOrUpdatePushToken(wsInitMsg) {
 		return;
 	}
 	//如果没有uid，需要用户点开扩展弹出页面，扫码登陆
+
 }
