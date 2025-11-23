@@ -253,7 +253,7 @@ function showNotification(title, text, id) {
 		'title': title || 'WxPusher通知提醒',
 		'message': text,
 		'silent': true, // 设为静音，由我们自己控制声音
-		'requireInteraction': true,
+		'requireInteraction': false,
 		'iconUrl': 'icon/128.png'
 	});
 }
